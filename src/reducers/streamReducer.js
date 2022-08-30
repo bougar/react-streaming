@@ -1,0 +1,27 @@
+import _ from "lodash";
+import {
+  CREATE_STREAM,
+  DELETE_STREAM,
+  UPDATE_STREAM,
+  GET_STREAM,
+  LIST_STREAMS,
+} from "../actions/types";
+
+const streamReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_STREAM:
+      return { ...state, [action.payload.id]: action.payload };
+    case CREATE_STREAM:
+      return { ...state, [action.payload.id]: action.payload };
+    case UPDATE_STREAM:
+      return { ...state, [action.payload.id]: action.payload };
+    case DELETE_STREAM:
+      return _.omit(state, action.payload);
+    case LIST_STREAMS:
+      return { ...state, ..._.mapKeys(action.payload, "id") };
+    default:
+      return state;
+  }
+};
+
+export default streamReducer;
